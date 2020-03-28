@@ -4,3 +4,4 @@ venv
 cmd.exe.lnk
 evetool/settings.py
 Readme.txt
+avalon/settings.py

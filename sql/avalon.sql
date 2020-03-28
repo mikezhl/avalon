@@ -1,5 +1,5 @@
 ﻿# Host: 127.0.0.1:2333  (Version 5.6.42-log)
-# Date: 2020-03-28 20:41:34
+# Date: 2020-03-28 21:27:37
 # Generator: MySQL-Front 6.1  (Build 1.26)
 
 
@@ -24,4 +24,3 @@ CREATE TABLE `game` (
 # Data for table "game"
 #
 
-INSERT INTO `game` VALUES (1,67,0,'one','{\'one\': [1, 0], \'two\': [2, 0]}',NULL,'','',1585397369);
