@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Avalon Game</title>
+    <style>
+        textarea{height:150px; overflow: auto}
+        td{min-width: 120px;}
+    </style>
+</head>
+<body>
+<form action="/update/" method="post" style="display: flex">
+    {% csrf_token %}
+    <div>
+        <p>游戏信息</p>
+        <table>
+            <tr>
+                <td>房间号</td>
+                <td><input type="text" name="room_num" value="{{room_num}}" autocomplete="off" /></td>
+            </tr>
+            <tr>
+                <td>你的名字</td>
+                <td><input type="text" name="name" value="{{name}}" readonly/></td>
+            </tr>
+            <tr>
+                <td>你的身份</td>
+                <td>{% if role == 1 %}好人{% elif role == 2 %}坏人{% else %}{% endif %}</td>
+            </tr>
+            <tr>
+                <td><input style="display: block" type="submit" value="刷新" formaction="/update/"/></td>
+                <td>{% if op %}<input style="display: block" type="submit" value="删除游戏" formaction="/delete/"/>{% endif %}</td>
+            </tr>
+            <tr>
+                <td>{% if status != 0 %}<input style="display: block" type="submit" value="任务成功" formaction="/vote/1/"/>{% endif %}</td>
+                <td>{% if op %}<input style="display: block" type="submit" value="开始游戏" formaction="/start/"/>{% endif %}</td>
+            </tr>
+            <tr>
+                <td>{% if status != 0 %}<input style="display: block" type="submit" value="任务失败" formaction="/vote/0/"/>{% endif %}</td>
+                <td>{% if status == 0 %}<input style="display: block" type="submit" value="离开" formaction="/leave/"/>{% endif %}</td>
+            </tr>
+        </table>
+    </div>
+
+    <div style="margin-left: 30px">
+        <p>玩家表</p>
+        <textarea name="players">{% for i,j in players.items %}{{ j.0 }} {{ i }} {% if role == 2 %}{% if j.1 == 1 %}好人{% elif j.1 == 2 %}坏人{% else %}{% endif %}{% endif %}&#10;{% endfor %}</textarea>
+    </div>
+
+    <div style="margin-left: 30px">
+        <p>记录</p>
+        <textarea name="record" style="width: 400px">{% for i in record %}{{ i }}&#10;{% endfor %}</textarea>
+    </div>
+</form>
+{% if note %}<p>System: {{ note }}</p>{% endif %}
+</body>
+</html>

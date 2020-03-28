@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Avalon</title>
+</head>
+
+<body>
+<div style="display: flex">
+    <div>
+        <p>创建新房间</p>
+        <form action="/create/" method="get">
+            <table>
+                <tr>
+                    <td>你的名字(纯字母)</td>
+                    <td><input type="text" name="name" autocomplete="off"/></td>
+                </tr>
+                <tr>
+                    <td><input type="submit" value="创建"></td>
+                </tr>
+            </table>
+        </form>
+    </div>
+
+    <div style="margin-left: 20px">
+        <p>加入房间</p>
+        <form action="/join/" method="get">
+            <table>
+                <tr>
+                    <td>房间号</td>
+                    <td> <input type="text" name="room_num" autocomplete="off"/></td>
+                </tr>
+                <tr>
+                    <td>你的名字(纯字母)</td>
+                    <td><input type="text" name="name" autocomplete="off"/></td>
+                </tr>
+                <tr>
+                    <td><input type="submit" value="加入"></td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</div>
+<p>{% if note %}System: {{ note }}{% endif %}</p>
+</body>
+
+</html>
