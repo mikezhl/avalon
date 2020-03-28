@@ -9,8 +9,10 @@ class Game(models.Model):
     players = models.TextField(blank=True, null=True)
     mission = models.TextField(blank=True, null=True)
     record = models.TextField(blank=True, null=True)
+    secret = models.TextField(blank=True, null=True)
     time = models.IntegerField(blank=True, null=True)
 
     class Meta:
         managed = False
         db_table = 'game'
+

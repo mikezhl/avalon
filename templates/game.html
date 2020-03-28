@@ -50,6 +50,21 @@
         <p>记录</p>
         <textarea name="record" style="width: 400px">{% for i in record %}{{ i }}&#10;{% endfor %}</textarea>
     </div>
+
+    <div style="margin-left: 30px">
+        <p>秘密投票</p>
+        <table>
+            <tr>
+                <td><input style="display: block" type="submit" value="赞成组队" formaction="/secret/0/"/></td>
+            </tr>
+            <tr>
+                <td>赞成人数: {{ secret_num }}</td>
+            </tr>
+            <tr>
+                {% if op %}<td><input style="display: block" type="submit" value="重置投票" formaction="/secret/1/"/></td>{% endif %}
+            </tr>
+        </table>
+    </div>
 </form>
 {% if note %}<p>System: {{ note }}</p>{% endif %}
 </body>

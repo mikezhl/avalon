@@ -82,6 +82,10 @@ def update(request,*note):
     else:
         op = 0
     role = players[name][1]
+    try:
+        secret_num = len(eval(result.secret))
+    except:
+        secret_num = ""
     return render(request, "game.html", {
         "op": op,
         "status": result.status,
@@ -91,6 +95,7 @@ def update(request,*note):
         "record": record,
         "note": note,
         "role": role,
+        "secret_num": secret_num,
     })
 
 def start(request):
@@ -186,6 +191,49 @@ def vote(request,choice):
         mission[5] = []
         mission[6] = []
     Game.objects.filter(room=room_num).update(status=status, mission=str(mission), record=str(record))
+    return render(request, "game.html", {
+        "op": op,
+        "status": result.status,
+        "room_num": room_num,
+        "name": name,
+        "players": players,
+        "record": record,
+        "note": note,
+        "role": role,
+    })
+
+def secret(request,reset):
+    note="秘密投票成功"
+    room_num = request.POST.get("room_num")
+    name = request.POST.get("name")
+    try:
+        result = Game.objects.get(room=room_num)
+    except:
+        return render(request, "main.html",{"note": "游戏不存在"})
+    players = eval(result.players)
+    if name == result.op:
+        op = 1
+    else:
+        op = 0
+    role = players[name][1]
+    try:
+        record = eval(result.record)
+    except:
+        record = []
+    if reset == 0:
+        try:
+            secret = eval(result.secret)
+        except:
+            secret = []
+        if name not in secret:
+            secret.append(name)
+            Game.objects.filter(room=room_num).update(secret=str(secret))
+        else:
+            note="你投过票了啊！"
+    elif reset ==1:
+        Game.objects.filter(room=room_num).update(secret="")
+        note = "秘密投票重置成功"
+
     return render(request, "game.html", {
         "op": op,
         "status": result.status,

@@ -26,4 +26,5 @@ urlpatterns = [
     path('start/',main_views.start),
     path('delete/',main_views.delete),
     path('vote/<int:choice>/',main_views.vote),
+    path('secret/<int:reset>/',main_views.secret),
 ]
