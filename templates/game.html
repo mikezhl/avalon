@@ -63,7 +63,7 @@
                     </tr>
                     <tr>
                         <td>你的身份</td>
-                        <td>{% if role == 1 %}好人{% elif role == 2 %}坏人{% else %}{% endif %}</td>
+                        <td>{% if status == 0 %}游戏未开始{% endif %}{% if role == 1 %}好人{% elif role == 2 %}坏人{% else %}{% endif %}</td>
                     </tr>
                     <tr>
                         <td>
@@ -99,13 +99,13 @@
             </div>
             <div class="first">
                 <h2>记录</h2>
-                {% for i in record %}{{ i }}<br>{% endfor %}<br>
+                {% if record %}{% for i in record %}{{ i }}<br>{% endfor %}<br>{% else %}等待游戏开始{% endif %}
             </div>
             <div class="first">
                 <h2>秘密投票</h2>
                 <table>
                     <tr>
-                        <td>赞成人数: {{ secret_num }}</td>
+                        <td>赞成人数: {% if secret_num %}{{ secret_num }}{% else %}暂无{% endif %}</td>
                     </tr>
                     <tr>
                         <td>

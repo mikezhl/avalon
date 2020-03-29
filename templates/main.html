@@ -30,13 +30,17 @@
 
 <body>
     <div class="container">
+        <div class="myform">
+            <h2 style="margin-bottom: 0px">抵抗组织阿瓦隆</h2>
+            <a href="https://github.com/zhlzhl123/avalon" style="font-size: 0.5em">Github</a>
+        </div>
         <form action="/create/" method="get" class="myform">
-            <h2>创建新房间</h2>
+            <h3>创建新房间</h3>
             <input type="text" name="name" placeholder="你的名字" class="form-control" />
             <button class="btn btn-lg btn-block btn-primary" type="submit">创建</button>
         </form>
         <form action="/join/" method="get" class="myform">
-            <h2>加入房间</h2>
+            <h3>加入房间</h3>
             <input type="text" name="room_num" autocomplete="off" placeholder="房间号" class="form-control" />
             <input type="text" name="name" placeholder="你的名字" class="form-control" />
             <button class="btn btn-lg btn-block btn-primary" type="submit">加入</button>
@@ -44,5 +48,4 @@
         <h3 class="myform">{% if note %}System: {{ note }}{% endif %}</h3>
     </div>
 </body>
-
 </html>
