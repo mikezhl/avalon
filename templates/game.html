@@ -2,15 +2,11 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
     <title>Avalon</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css"
-        integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js"
-        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
-        crossorigin="anonymous"></script>
     <style>
         body {
             background-color: #eee;
@@ -29,6 +25,8 @@
 
         input {
             width: 90%;
+            border: none;
+            background: none;
         }
 
         .first {
@@ -38,7 +36,7 @@
 
         .btn-block {
             width: 180px;
-            margin-bottom: 5px;
+            margin-top: 5px;
         }
 
         .container {
@@ -56,7 +54,7 @@
                     <tr>
                         <td>房间号</td>
                         <td>
-                            <input type="text" name="room_num" value="{{room_num}}" autocomplete="off" /></td>
+                            <input type="text" name="room_num" value="{{room_num}}" autocomplete="off" readonly/></td>
                     </tr>
                     <tr>
                         <td>你的名字</td>
@@ -95,16 +93,20 @@
             </div>
             <div class="first">
                 <h2>玩家表</h2>
-                <textarea
-                    name="players">{% for i,j in players.items %}{{ j.0 }} {{ i }} {% if role == 2 %}{% if j.1 == 1 %}好人{% elif j.1 == 2 %}坏人{% else %}{% endif %}{% endif %}&#10;{% endfor %}</textarea>
+                <div class="row">
+                {% for i,j in players.items %}<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">{{ j.0 }} {{ i }} {% if role == 2 %}{% if j.1 == 1 %}好人{% elif j.1 == 2 %}坏人{% else %}{% endif %}{% endif %}</div>{% endfor %}
+                </div>
             </div>
             <div class="first">
                 <h2>记录</h2>
-                <textarea name="record">{% for i in record %}{{ i }}&#10;{% endfor %}</textarea>
+                {% for i in record %}{{ i }}<br>{% endfor %}<br>
             </div>
             <div class="first">
                 <h2>秘密投票</h2>
                 <table>
+                    <tr>
+                        <td>赞成人数: {{ secret_num }}</td>
+                    </tr>
                     <tr>
                         <td>
                             <button class="btn btn-lg btn-block  btn-primary" type="submit"
@@ -112,9 +114,6 @@
                         <td>
                             <button class="btn btn-lg btn-block  btn-primary" type="submit"
                                 formaction="/secret/1/">重置投票</button></td>{% endif %}
-                    </tr>
-                    <tr>
-                        <td>赞成人数: {{ secret_num }}</td>
                     </tr>
                 </table>
             </div>
